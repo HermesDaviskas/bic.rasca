@@ -1,0 +1,52 @@
+@startuml
+
+node "Server Box" as ServerDocker {
+    rectangle "Loc. Server" as ls
+    rectangle "R.A.S.C. Server" as rs
+    rectangle "Switch" as sw
+    rectangle "Light controller" as lc
+    rs <-> sw : HTTP requests
+    rs -- lc : Signals
+    ls -- sw 
+}
+
+circle "Loc. Ant 1" as la1
+circle "Loc. Ant 2" as la2
+circle "Loc. Ant x" as lax
+
+sw -- la1 : PoE
+sw -- la2 : PoE
+sw -- lax : PoE
+
+circle "Light 1" as l1
+circle "Light 2" as l2
+circle "Light 3" as l3
+circle "Light 4" as l4
+
+lc -- l1 : 24V
+lc -- l2 : 24V
+lc -- l3 : 24V
+lc -- l4 : 24V
+
+rectangle "WiFi Router" as rt
+
+node "Vehicle 1" as vh1 {
+    rectangle "Client" as cl1
+    rectangle "Monitor" as mn1
+    rectangle "BT Speaker" as sp1
+    cl1 --> mn1 : Presents radar
+    cl1 --> sp1 : Plays alerts
+}
+
+node "Vehicle 2" as vh2 {
+    rectangle "Client" as cl2
+    rectangle "Monitor" as mn2
+    rectangle "BT Speaker" as sp2
+    cl2 --> mn2 : Presents radar
+    cl2 --> sp2 : Plays alerts
+}
+    rs --> rt : Sends telemetry
+    rt --> cl1 : Receives telemetry
+    rt --> cl2 : Receives telemetry
+
+@enduml

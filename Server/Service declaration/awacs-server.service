@@ -1,0 +1,13 @@
+[Unit]
+Description=RASCA Server
+After=multi-user.target network.target
+Requires=mosquitto.service module.gpio-control.service
+
+[Service]
+Environment="HOME=/home/ErmisNtaviskas"
+Type=simple
+ExecStart=/usr/bin/python /home/ErmisNtaviskas/.awacs-server/awacs_server.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,12 @@
+{
+    "unitId": "12",
+    "mqttIp": "192.168.20.150",
+    "mqttPort": 1884,
+    "hswVal": 10,
+    "hsw": false,
+    "pwdVal": 10,
+    "pwd": true,
+    "abdVal": 7,
+    "abd": "auto",
+    "mcdVal": 20
+}

@@ -1,0 +1,21 @@
+[Unit]
+StandardError=syslog
+Description=Node-RED
+After=network.target multi-user.target mosquitto.service
+Requires=network.target mosquitto.service
+
+[Service]
+User=ErmisNtaviskas
+Group=ErmisNtaviskas
+SupplementaryGroups=audio
+Environment="HOME=/home/ErmisNtaviskas"
+Environment="PULSE_SERVER=unix:/run/user/1000/pulse/native"
+ExecStart=/usr/bin/node /usr/local/lib/node_modules/node-red/red.js
+Restart=on-failure
+WorkingDirectory=/home/ErmisNtaviskas
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=node-red
+
+[Install]
+WantedBy=multi-user.target

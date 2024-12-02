@@ -1,0 +1,18 @@
+[Unit]
+Description=Bluetooth Auto Connect to Speaker
+After=bluetooth.service
+
+[Service]
+User=ErmisNtaviskas
+Group=ErmisNtaviskas
+Environment="HOME=/home/ErmisNtaviskas" "DISPLAY=:0" "XDG_RUNTIME_DIR=/run/user/1000"
+ExecStartPre=/bin/sleep 10
+ExecStart=/bin/bash -c "/usr/bin/bluetoothctl connect 92:94:93:62:7C:89 && /bin/sleep 5 && /usr/bin/espeak 'Speaker connected'"
+Restart=on-failure
+WorkingDirectory=/home/ErmisNtaviskas
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=bluetooth-autoconnect
+
+[Install]
+WantedBy=multi-user.target

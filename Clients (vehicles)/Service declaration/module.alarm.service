@@ -1,0 +1,19 @@
+[Unit]
+Description=module.alarm
+After=network.target multi-user.target mosquitto.service
+Requires=network.target
+
+[Service]
+type=simple
+User=ErmisNtaviskas
+Group=ErmisNtaviskas
+Environment="HOME=/home/ErmisNtaviskas"
+ExecStart=sudo python /home/ErmisNtaviskas/modules/alarm.py
+Restart=on-abort
+WorkingDirectory=/home/ErmisNtaviskas
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=node-red
+
+[Install]
+WantedBy=multi-user.target

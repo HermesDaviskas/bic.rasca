@@ -1,0 +1,13 @@
+[Unit]
+Description=Node-RED
+After=network.target multi-user.target module.gpio-control.service
+Requires=module.gpio-control.service
+
+[Service]
+Environment="HOME=/home/ErmisNtaviskas"
+Type=simple
+ExecStart=/usr/bin/node /home/ErmisNtaviskas/node_modules/node-red/red.js
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
